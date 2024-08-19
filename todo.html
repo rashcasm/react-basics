@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <script>
+        let globalid = 0;
+        
+        function markasdone(id){
+            const parent = document.getElementById(id);
+            parent.children[2].innerHTML = "Done";
+        }
+
+        function createchild(title, desc, id){
+            const childDiv = document.createElement("div");
+            const titlechild = document.createElement("div");
+            titlechild.innerHTML = title;
+            const descchild = document.createElement("div");
+            descchild.innerHTML = desc;
+            const buttonchild = document.createElement("button");
+            buttonchild.innerHTML = "Mark as done";
+            buttonchild.setAttribute("onclick", `markasdone('${id}')`);
+            const lolbreak = document.createElement("br");
+
+            childDiv.appendChild(titlechild);
+            childDiv.appendChild(descchild);
+            childDiv.appendChild(buttonchild);
+            childDiv.setAttribute("id", id);
+
+            childDiv.appendChild(document.createElement("br"));
+            childDiv.appendChild(document.createElement("br"));
+
+            return childDiv;            
+        }
+
+        function addTodo(){
+            const title = document.getElementById("titleinput").value;
+            const desc = document.getElementById("descinput").value;
+            const parentdiv = document.getElementById("container");
+
+            parentdiv.appendChild(createchild(title, desc, globalid++));
+        }
+    </script>
+</head>
+<body>
+    <h1>Todo App</h1>
+
+    <input type="text" id="titleinput" placeholder="title"><br><br>
+    <input type="text" id="descinput" placeholder="description"><br><br>
+    <button onclick="addTodo()">Add todo</button><br><br>
+    <div id="container"></div>
+</body>
+</html>
